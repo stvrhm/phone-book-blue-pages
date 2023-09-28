@@ -1,4 +1,4 @@
-import { Box, Button, Stack, TextField, Typography } from '@mui/material'
+import { Box, Button, Paper, Stack, TextField, Typography } from '@mui/material'
 import { redirect, json } from '@remix-run/node'
 import type { MetaFunction, ActionFunctionArgs } from '@remix-run/node'
 import { Form, useActionData } from '@remix-run/react'
@@ -59,53 +59,53 @@ export default function NewContactRoute() {
 	return (
 		<Box>
 			<Box
-				sx={{
-					marginTop: 8,
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-				}}
+				marginTop={8}
+				display="flex"
+				flexDirection="column"
+				alignItems="center"
 			>
-				<Stack spacing={6}>
-					<Typography component="h1" variant="h4">
-						Add Contact
-					</Typography>
+				<Paper sx={{ padding: 3 }} elevation={6}>
+					<Stack spacing={6}>
+						<Typography component="h1" variant="h4">
+							Add Contact
+						</Typography>
 
-					<Form method="post">
-						<TextField
-							margin="normal"
-							required
-							fullWidth
-							id="name"
-							label="Name"
-							name="name"
-							autoFocus
-							onChange={e => handleChange(e)}
-							helperText={errors.name || data?.errors.name}
-							error={Boolean(errors.name) || Boolean(data?.errors.name)}
-						/>
-						<TextField
-							margin="normal"
-							required
-							fullWidth
-							name="phone"
-							label="Phone"
-							id="phone"
-							onChange={e => handleChange(e)}
-							helperText={errors.phone || data?.errors.phone}
-							error={Boolean(errors.phone) || Boolean(data?.errors.phone)}
-						/>
-						<Button
-							type="submit"
-							fullWidth
-							variant="contained"
-							sx={{ mt: 3, mb: 2 }}
-							disabled={Boolean(errors.name) || Boolean(errors.phone)}
-						>
-							Add
-						</Button>
-					</Form>
-				</Stack>
+						<Form method="post">
+							<TextField
+								margin="normal"
+								required
+								fullWidth
+								id="name"
+								label="Name"
+								name="name"
+								autoFocus
+								onChange={e => handleChange(e)}
+								helperText={errors.name || data?.errors.name}
+								error={Boolean(errors.name) || Boolean(data?.errors.name)}
+							/>
+							<TextField
+								margin="normal"
+								required
+								fullWidth
+								name="phone"
+								label="Phone"
+								id="phone"
+								onChange={e => handleChange(e)}
+								helperText={errors.phone || data?.errors.phone}
+								error={Boolean(errors.phone) || Boolean(data?.errors.phone)}
+							/>
+							<Button
+								type="submit"
+								fullWidth
+								variant="contained"
+								sx={{ mt: 3, mb: 2 }}
+								disabled={Boolean(errors.name) || Boolean(errors.phone)}
+							>
+								Add
+							</Button>
+						</Form>
+					</Stack>
+				</Paper>
 			</Box>
 		</Box>
 	)

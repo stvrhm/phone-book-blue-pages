@@ -4,7 +4,7 @@ export default function Footer() {
 	return (
 		<Container maxWidth="xl" sx={{ mt: 3 }}>
 			<Box py={4}>
-				<Typography variant="body2">
+				<Typography variant="body2" color="#fff">
 					Your contacts, your way. © 2023 Blue Pages - Phone Book. All rights
 					reserved.
 				</Typography>

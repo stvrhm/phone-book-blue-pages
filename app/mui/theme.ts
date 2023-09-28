@@ -4,9 +4,13 @@ import { blue, grey, amber } from '@mui/material/colors'
 const theme = {
 	palette: {
 		primary: {
+			light: blue['50'],
 			main: blue['A700'],
 		},
 		secondary: {
+			main: '#fff',
+		},
+		accent: {
 			main: amber['500'],
 		},
 		border: {
@@ -17,24 +21,25 @@ const theme = {
 			secondary: grey[800],
 		},
 		background: {
-			default: amber['50'],
+			default: '#fff',
+			paper: grey['50'],
 		},
+		paper: {},
 	},
 }
 
 const themeDark = {
 	palette: {
-		// primary: {
-		// 	main: blue['A700'],
-		// },
-		// secondary: {
-		// 	main: red['A400'],
-		// },
-		// divider: blue,
-		// text: {
-		// 	primary: grey[900],
-		// 	secondary: grey[800],
-		// },
+		primary: {
+			main: blue['A100'],
+		},
+		secondary: {
+			main: blue['A100'],
+		},
+		background: {
+			default: grey['900'],
+			paper: grey['900'],
+		},
 	},
 }
 

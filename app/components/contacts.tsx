@@ -25,6 +25,7 @@ import invariant from 'tiny-invariant'
 import type { ContactData } from 'types'
 import { FixedSizeList } from 'react-window'
 import { getInitials } from '~/utils/misc'
+import { grey } from '@mui/material/colors'
 
 interface ContactCardProps {
 	n: number
@@ -44,7 +45,12 @@ function ContactCard({ n, contact, style, onClick }: ContactCardProps) {
 			maxWidth={500}
 			style={style}
 		>
-			<Card sx={{ display: 'flex', width: '100%' }}>
+			<Card
+				sx={{
+					display: 'flex',
+					width: '100%',
+				}}
+			>
 				<Box display="flex" flexDirection="row" width={'100%'}>
 					<CardHeader
 						sx={{ flex: '1 0 auto' }}
@@ -89,8 +95,7 @@ function ContactList({ entries, onSelect }: ContactListProps) {
 	}
 
 	return (
-		<Stack spacing={1}>
-			<Typography variant="h6">Results</Typography>
+		<Box>
 			{entries.length === 0 ? (
 				<Box maxHeight={500} height={'50vh'}>
 					<Typography variant="body1">
@@ -120,7 +125,7 @@ function ContactList({ entries, onSelect }: ContactListProps) {
 					}}
 				</FixedSizeList>
 			)}
-		</Stack>
+		</Box>
 	)
 }
 
@@ -173,9 +178,10 @@ function ContactSearchCount({ count }: ContactSearchCountProps) {
 interface ContactSearchProps {
 	term: string
 	setTerm: React.Dispatch<React.SetStateAction<string>>
+	color: 'primary' | 'secondary'
 }
 
-function ContactSearch({ term, setTerm }: ContactSearchProps) {
+function ContactSearch({ term, setTerm, color }: ContactSearchProps) {
 	const [error, setError] = React.useState<string>('')
 
 	// Handle real-time search as the user types
@@ -212,12 +218,18 @@ function ContactSearch({ term, setTerm }: ContactSearchProps) {
 						</InputAdornment>
 					),
 				}}
+				style={{ width: '100%' }}
 			/>
 		</Box>
 	)
 }
 
-function Contacts({ contacts }: { contacts: Array<ContactData> }) {
+interface ContactsProps {
+	contacts: Array<ContactData>
+	color?: 'primary' | 'secondary'
+}
+
+function Contacts({ contacts, color = 'primary' }: ContactsProps) {
 	const [searchTerm, setSearchTerm] = React.useState<string>('')
 	const [items, setItems] = React.useState<{ name: string; phone: string }[]>(
 		[],
@@ -252,22 +264,27 @@ function Contacts({ contacts }: { contacts: Array<ContactData> }) {
 	return (
 		<Box>
 			<Grid container rowGap={2}>
-				<Grid item xs={12} md={4}>
+				<Grid item xs={12} md={3}>
 					<Box>
 						<Stack spacing={2} maxWidth="sm">
-							<ContactSearch term={searchTerm} setTerm={setSearchTerm} />
+							<ContactSearch
+								term={searchTerm}
+								setTerm={setSearchTerm}
+								color={color}
+							/>
 							<ContactSearchCount count={items.length} />
 						</Stack>
 					</Box>
 				</Grid>
-				<Grid item xs={12} md={8} paddingLeft={{ xs: '0', md: 2 }}>
-					<Box maxWidth="60ch">
+				<Grid item xs={12} md={9} paddingLeft={{ xs: '0', md: 4 }}>
+					<Stack spacing={1} maxWidth="60ch">
+						<Typography variant="h6">Results</Typography>
 						{searchTerm.length > 1 && items.length < 1 ? (
 							<Box>Sorry, nothing found.</Box>
 						) : (
 							<ContactList entries={items} onSelect={handleSelectContact} />
 						)}
-					</Box>
+					</Stack>
 				</Grid>
 			</Grid>
 

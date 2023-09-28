@@ -1,4 +1,5 @@
 import React from 'react'
+import type { ButtonOwnProps, TypographyOwnProps } from '@mui/material'
 import {
 	AppBar,
 	Toolbar,
@@ -28,7 +29,11 @@ const navItems = [
 	},
 ]
 
-export function Navbar() {
+interface NavbarProps {
+	color?: 'primary' | 'secondary'
+}
+
+export function Navbar({ color = 'primary' }: NavbarProps) {
 	const [mobileOpen, setMobileOpen] = React.useState(false)
 
 	const handleDrawerToggle = () => {
@@ -89,7 +94,7 @@ export function Navbar() {
 						<Typography
 							variant="h6"
 							component="div"
-							color="primary"
+							color={color}
 							sx={{ flexGrow: 1 }}
 						>
 							Blue Pages
@@ -101,7 +106,7 @@ export function Navbar() {
 						>
 							<Box>
 								{navItems.map(item => (
-									<LinkButton key={item.id} to={item.slug}>
+									<LinkButton key={item.id} to={item.slug} color={color}>
 										{item.name}
 									</LinkButton>
 								))}
@@ -110,8 +115,8 @@ export function Navbar() {
 							<LinkButton
 								to="../contacts/new"
 								size="small"
-								color="primary"
 								variant="outlined"
+								color={color}
 							>
 								New Contact
 							</LinkButton>
