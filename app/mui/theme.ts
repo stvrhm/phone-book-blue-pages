@@ -1,6 +1,9 @@
 import type { PaletteMode } from '@mui/material'
 import { blue, grey, amber } from '@mui/material/colors'
 
+/**
+ * The base theme object with palette definitions for light mode.
+ */
 const theme = {
 	palette: {
 		primary: {
@@ -21,13 +24,16 @@ const theme = {
 			secondary: grey[800],
 		},
 		background: {
-			default: '#fff',
-			paper: grey['50'],
+			default: grey['50'],
+			paper: '#fff',
 		},
 		paper: {},
 	},
 }
 
+/**
+ * The theme object specifically for dark mode, overriding some palette values.
+ */
 const themeDark = {
 	palette: {
 		primary: {
@@ -43,16 +49,22 @@ const themeDark = {
 	},
 }
 
+/**
+ * Function to retrieve design tokens (theme) based on the selected palette mode.
+ *
+ * @param mode - The palette mode, either 'light' or 'dark'.
+ * @returns The design tokens (theme) for the selected mode.
+ */
 const getDesignTokens = (mode: PaletteMode) => ({
 	palette: {
 		mode,
 		...(mode === 'light'
 			? {
-					// palette values for light mode
+					// Palette values for light mode
 					...theme.palette,
 			  }
 			: {
-					// palette values for dark mode
+					// Palette values for dark mode
 					...themeDark.palette,
 			  }),
 	},

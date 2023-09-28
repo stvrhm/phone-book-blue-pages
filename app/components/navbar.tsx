@@ -1,5 +1,4 @@
 import React from 'react'
-import type { ButtonOwnProps, TypographyOwnProps } from '@mui/material'
 import {
 	AppBar,
 	Toolbar,
@@ -58,7 +57,7 @@ export function Navbar({ color = 'primary' }: NavbarProps) {
 						</LinkButton>
 					</ListItem>
 				))}
-				<ListItem disablePadding sx={{ justifyContent: 'center' }}>
+				<ListItem disablePadding sx={{ justifyContent: 'center', my: 1 }}>
 					<LinkButton
 						to="../contacts/new"
 						size="small"
@@ -123,7 +122,7 @@ export function Navbar({ color = 'primary' }: NavbarProps) {
 							<ThemeToggle />
 						</Box>
 						<IconButton
-							color="inherit"
+							color={color}
 							aria-label="open drawer"
 							edge="start"
 							onClick={handleDrawerToggle}
@@ -137,6 +136,7 @@ export function Navbar({ color = 'primary' }: NavbarProps) {
 					<Drawer
 						anchor="right"
 						variant="temporary"
+						color={color}
 						open={mobileOpen}
 						onClose={handleDrawerToggle}
 						ModalProps={{

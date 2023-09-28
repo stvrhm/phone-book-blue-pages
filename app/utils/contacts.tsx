@@ -2,6 +2,11 @@ import React from 'react'
 import data from '../../data/telefonbuch.json'
 import type { ContactData } from 'types'
 
+/**
+ * Asynchronously retrieves a list of contacts from a data source.
+ *
+ * @returns A promise that resolves to an array of ContactData.
+ */
 async function getContacts(): Promise<Array<ContactData>> {
 	return new Promise(resolve => {
 		// Simulate an asynchronous fetch request
@@ -12,7 +17,11 @@ async function getContacts(): Promise<Array<ContactData>> {
 	})
 }
 
-// custom hook to fetch contacts from some API
+/**
+ * Custom hook to fetch contacts from an API.
+ *
+ * @returns An object containing data, loading state, and error state.
+ */
 function useContacts() {
 	const [data, setData] = React.useState(null)
 	const [loading, setLoading] = React.useState(true)

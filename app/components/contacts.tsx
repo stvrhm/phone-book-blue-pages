@@ -25,7 +25,6 @@ import invariant from 'tiny-invariant'
 import type { ContactData } from 'types'
 import { FixedSizeList } from 'react-window'
 import { getInitials } from '~/utils/misc'
-import { grey } from '@mui/material/colors'
 
 interface ContactCardProps {
 	n: number
@@ -36,6 +35,7 @@ interface ContactCardProps {
 
 function ContactCard({ n, contact, style, onClick }: ContactCardProps) {
 	const initials = getInitials(contact.name)
+
 	return (
 		<Box
 			display="flex"
@@ -90,7 +90,13 @@ interface ContactListProps {
 }
 
 function ContactList({ entries, onSelect }: ContactListProps) {
+	/**
+	 * Handles the action of initiating a call for a specific contact entry.
+	 *
+	 * @param entry - The contact data for which the call is initiated.
+	 */
 	function handleCall(entry: ContactData) {
+		// Call the 'onSelect' function with the provided contact entry and 'true' to open the dialog
 		onSelect(entry, true)
 	}
 
@@ -138,8 +144,16 @@ interface ContactDialogProps {
 function ContactDialog({ isOpen, onClose, contact }: ContactDialogProps) {
 	if (!contact) return
 
+	/**
+	 * Handles initiating a phone call when a phone number is provided.
+	 *
+	 * @param phone - The phone number to call, in string format.
+	 */
 	const handleCall = (phone: string) => {
+		// Ensure that a valid phone number is provided, otherwise throw error
 		invariant(phone, 'Phone is required')
+
+		// Open the phone dialer with the provided phone number
 		window.open(`tel:${phone}`)
 	}
 
@@ -171,6 +185,7 @@ interface ContactSearchCountProps {
 }
 
 function ContactSearchCount({ count }: ContactSearchCountProps) {
+	// Don't show counter if there are no results
 	if (count < 1) return
 	return <Typography>Found {count} contacts.</Typography>
 }
@@ -184,17 +199,24 @@ interface ContactSearchProps {
 function ContactSearch({ term, setTerm, color }: ContactSearchProps) {
 	const [error, setError] = React.useState<string>('')
 
-	// Handle real-time search as the user types
+	/**
+	 * Handles input changes in a search input field.
+	 *
+	 * @param event - The `React.ChangeEvent` object representing the input change event.
+	 */
 	function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
+		// Get the value from the input field
 		const input = event.target.value
-		// Regular expression to allow only letters and spaces
-		// const regex = /^[A-Za-z\s]+$/
+
+		// Define a regular expression to validate the input
 		const regex = /^[A-Za-zäÄüÜöÖß\s]+$/
 
 		if (regex.test(input) || input === '') {
+			// If the input is valid or empty, update the search term and clear any error
 			setTerm(input)
 			setError('')
 		} else {
+			// If the input is invalid, set an error message
 			setError('Only letters and spaces are allowed.')
 		}
 	}

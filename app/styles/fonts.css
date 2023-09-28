@@ -1,40 +1,44 @@
-/* roboto-300 */
+/* Roboto 300 */
 @font-face {
-	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	font-display: swap;
 	font-family: 'Roboto';
 	font-style: normal;
 	font-weight: 300;
-	src: url('/fonts/roboto/roboto-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+	src: url('/fonts/roboto/roboto-300.woff2') format('woff2');
 }
-/* roboto-regular */
+
+/* Roboto regular */
 @font-face {
-	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	font-display: swap;
 	font-family: 'Roboto';
 	font-style: normal;
 	font-weight: 400;
-	src: url('/fonts/roboto/roboto-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+	src: url('/fonts/roboto/roboto-regular.woff2') format('woff2');
 }
-/* roboto-500 */
+
+/* Roboto 500 */
 @font-face {
-	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	font-display: swap;
 	font-family: 'Roboto';
 	font-style: normal;
 	font-weight: 500;
-	src: url('/fonts/roboto/roboto-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+	src: url('/fonts/roboto/roboto-500.woff2') format('woff2');
 }
-/* roboto-700 */
+
+/* Roboto 700 */
 @font-face {
-	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	font-display: swap;
 	font-family: 'Roboto';
 	font-style: normal;
 	font-weight: 700;
-	src: url('/fonts/roboto/roboto-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+	src: url('/fonts/roboto/roboto-700.woff2') format('woff2');
 }
-/* roboto-900 */
+
+/* Roboto 900 */
 @font-face {
-	font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+	font-display: swap;
 	font-family: 'Roboto';
 	font-style: normal;
 	font-weight: 900;
-	src: url('/fonts/roboto/roboto-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+	src: url('/fonts/roboto/roboto-900.woff2') format('woff2');
 }

@@ -1,11 +1,8 @@
 import { Box, Container, Stack, Typography } from '@mui/material'
 import type { MetaFunction } from '@remix-run/node'
 import { Navbar } from '~/components/navbar'
-import Footer from '~/components/footer'
 import { LinkButton } from '~/components/link-button'
-import Wave from 'react-wavify'
-import { blue } from '@mui/material/colors'
-import { theme } from '~/mui/theme'
+import { FooterWave } from '~/components/footer-wave'
 
 export const meta: MetaFunction = () => {
 	return [
@@ -26,7 +23,7 @@ export default function Index() {
 		>
 			<Navbar />
 			<Box flex={1}>
-				<Container maxWidth="xl" sx={{ marginTop: 6 }}>
+				<Container maxWidth="xl" sx={{ marginTop: { xs: 6, sm: 8, md: 12 } }}>
 					<Stack spacing={6} maxWidth="sm">
 						<Typography component="h1" variant="h2">
 							Your Digital <strong>Rolodex</strong>
@@ -52,36 +49,7 @@ export default function Index() {
 					</Stack>
 				</Container>
 			</Box>
-			<Box position="relative" height="25vh">
-				<Box
-					position="absolute"
-					top={'50%'}
-					bottom={0}
-					left={0}
-					right={0}
-					zIndex={10}
-				>
-					<Container maxWidth="xl">
-						<Box py={4}>
-							<Typography variant="body2" color="#fff">
-								Your contacts, your way. © 2023 Blue Pages - Phone Book. All
-								rights reserved.
-							</Typography>
-						</Box>
-					</Container>
-				</Box>
-				<Wave
-					fill={theme.palette.primary.main}
-					paused={false}
-					style={{ display: 'flex', height: '100%' }}
-					options={{
-						height: 20,
-						amplitude: 20,
-						speed: 0.15,
-						points: 3,
-					}}
-				/>
-			</Box>
+			<FooterWave />
 		</Box>
 	)
 }

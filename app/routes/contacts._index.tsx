@@ -31,8 +31,6 @@ export default function ContactsHomeRoute() {
 	const { contacts } = useLoaderData<typeof loader>()
 	const { theme } = useThemeContext()
 
-	console.log('here', theme)
-
 	return (
 		<Paper
 			sx={{
