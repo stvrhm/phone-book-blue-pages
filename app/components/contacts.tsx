@@ -30,10 +30,10 @@ interface ContactCardProps {
 	n: number
 	contact: ContactData
 	style: CSSProperties
-	onClick: any
+	onClick: () => void
 }
 
-export function ContactCard({ n, contact, style, onClick }: ContactCardProps) {
+function ContactCard({ n, contact, style, onClick }: ContactCardProps) {
 	const initials = getInitials(contact.name)
 	return (
 		<Box
@@ -50,7 +50,7 @@ export function ContactCard({ n, contact, style, onClick }: ContactCardProps) {
 						sx={{ flex: '1 0 auto' }}
 						avatar={
 							<Avatar
-								sx={{ bgcolor: 'secondary.main' }}
+								sx={{ bgcolor: 'primary.main' }}
 								aria-label="contact name initials"
 							>
 								{initials}
@@ -80,61 +80,47 @@ export function ContactCard({ n, contact, style, onClick }: ContactCardProps) {
 
 interface ContactListProps {
 	entries: Array<ContactData>
-	onSelect: any
+	onSelect: (contact: ContactData, openDialog: boolean) => void
 }
 
-const TOP_PADDING = 12
-
-const Inner = React.forwardRef<any, any>(({ style, ...rest }, ref) => (
-	<div
-		ref={ref}
-		style={{
-			...style,
-			height: `${parseFloat(style.height) + TOP_PADDING}px`,
-		}}
-		{...rest}
-	/>
-))
-
-export function ContactList({ entries, onSelect }: ContactListProps) {
+function ContactList({ entries, onSelect }: ContactListProps) {
 	function handleCall(entry: ContactData) {
 		onSelect(entry, true)
 	}
 
-	if (entries.length === 0) {
-		return (
-			<Box maxHeight={500} height={'50vh'}>
-				<Typography variant="body1">
-					Start typing a name in the search field to find contacts in our phone
-					book. We'll help you find the information you need.
-				</Typography>
-			</Box>
-		)
-	}
-
 	return (
-		<FixedSizeList
-			height={800}
-			width={'100%'}
-			itemSize={80}
-			innerElementType={Inner}
-			itemCount={entries.length}
-			itemData={entries}
-		>
-			{({ index, style, data }) => {
-				const contact = data[index]
+		<Stack spacing={1}>
+			<Typography variant="h6">Results</Typography>
+			{entries.length === 0 ? (
+				<Box maxHeight={500} height={'50vh'}>
+					<Typography variant="body1">
+						Start typing a name in the search field to find contacts.
+					</Typography>
+				</Box>
+			) : (
+				<FixedSizeList
+					height={380}
+					width={'100%'}
+					itemSize={80}
+					itemCount={entries.length}
+					itemData={entries}
+				>
+					{({ index, style, data }) => {
+						const contact = data[index]
 
-				return (
-					<ContactCard
-						key={contact.phone}
-						onClick={() => handleCall(contact)}
-						n={index}
-						contact={contact}
-						style={style}
-					/>
-				)
-			}}
-		</FixedSizeList>
+						return (
+							<ContactCard
+								key={contact.phone}
+								onClick={() => handleCall(contact)}
+								n={index}
+								contact={contact}
+								style={style}
+							/>
+						)
+					}}
+				</FixedSizeList>
+			)}
+		</Stack>
 	)
 }
 
@@ -144,11 +130,7 @@ interface ContactDialogProps {
 	contact: ContactData | null
 }
 
-export function ContactDialog({
-	isOpen,
-	onClose,
-	contact,
-}: ContactDialogProps) {
+function ContactDialog({ isOpen, onClose, contact }: ContactDialogProps) {
 	if (!contact) return
 
 	const handleCall = (phone: string) => {
@@ -179,17 +161,21 @@ export function ContactDialog({
 	)
 }
 
-export function ContactSearchCount({ count }: { count: number }) {
+interface ContactSearchCountProps {
+	count: number
+}
+
+function ContactSearchCount({ count }: ContactSearchCountProps) {
 	if (count < 1) return
 	return <Typography>Found {count} contacts.</Typography>
 }
 
 interface ContactSearchProps {
 	term: string
-	setTerm: any
+	setTerm: React.Dispatch<React.SetStateAction<string>>
 }
 
-export function ContactSearch({ term, setTerm }: ContactSearchProps) {
+function ContactSearch({ term, setTerm }: ContactSearchProps) {
 	const [error, setError] = React.useState<string>('')
 
 	// Handle real-time search as the user types
@@ -211,7 +197,7 @@ export function ContactSearch({ term, setTerm }: ContactSearchProps) {
 		<Box>
 			<TextField
 				name="name"
-				label="Search for a contact name"
+				label="Search contact name"
 				variant="outlined"
 				onChange={handleSearch}
 				color="primary"
@@ -231,7 +217,7 @@ export function ContactSearch({ term, setTerm }: ContactSearchProps) {
 	)
 }
 
-export function Contacts({ contacts }: { contacts: Array<ContactData> }) {
+function Contacts({ contacts }: { contacts: Array<ContactData> }) {
 	const [searchTerm, setSearchTerm] = React.useState<string>('')
 	const [items, setItems] = React.useState<{ name: string; phone: string }[]>(
 		[],
@@ -264,24 +250,20 @@ export function Contacts({ contacts }: { contacts: Array<ContactData> }) {
 	}
 
 	return (
-		<React.Fragment>
-			<Grid container spacing={2}>
-				<Grid item xs={12} sm={4}>
+		<Box>
+			<Grid container rowGap={2}>
+				<Grid item xs={12} md={4}>
 					<Box>
-						<Stack
-							spacing={2}
-							maxWidth="sm"
-							sx={{ marginLeft: 'auto', marginRight: 'auto' }}
-						>
+						<Stack spacing={2} maxWidth="sm">
 							<ContactSearch term={searchTerm} setTerm={setSearchTerm} />
 							<ContactSearchCount count={items.length} />
 						</Stack>
 					</Box>
 				</Grid>
-				<Grid item xs={12} sm={8}>
-					<Box>
+				<Grid item xs={12} md={8} paddingLeft={{ xs: '0', md: 2 }}>
+					<Box maxWidth="60ch">
 						{searchTerm.length > 1 && items.length < 1 ? (
-							<Box>Damn.</Box>
+							<Box>Sorry, nothing found.</Box>
 						) : (
 							<ContactList entries={items} onSelect={handleSelectContact} />
 						)}
@@ -294,6 +276,15 @@ export function Contacts({ contacts }: { contacts: Array<ContactData> }) {
 				onClose={() => setDialogOpen(false)}
 				contact={selectedContact}
 			/>
-		</React.Fragment>
+		</Box>
 	)
+}
+
+export {
+	ContactCard,
+	ContactDialog,
+	ContactList,
+	Contacts,
+	ContactSearch,
+	ContactSearchCount,
 }

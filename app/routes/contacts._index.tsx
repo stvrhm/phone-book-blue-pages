@@ -9,7 +9,7 @@ import { slow } from '~/utils/misc'
 
 export async function loader() {
 	const contacts = getContacts()
-	// testing pending ui
+	// 👇🏼 testing pending ui
 	// const contacts = getContacts().then(slow(1000))
 
 	return defer({
@@ -19,7 +19,7 @@ export async function loader() {
 
 export const meta: MetaFunction = () => {
 	return [
-		{ title: 'Phone Book | Geomagic' },
+		{ title: 'Search Contact | Blue Pages' },
 		{ name: 'description', content: 'Job Interview Exercise' },
 	]
 }
@@ -30,8 +30,8 @@ export default function ContactsHomeRoute() {
 	return (
 		<Box>
 			<Stack spacing={6}>
-				<Typography component="h1" variant="h3">
-					Contacts
+				<Typography component="h1" variant="h4">
+					Search Phone Book
 				</Typography>
 				<Suspense
 					fallback={

@@ -53,6 +53,19 @@ export function Navbar() {
 						</LinkButton>
 					</ListItem>
 				))}
+				<ListItem disablePadding sx={{ justifyContent: 'center' }}>
+					<LinkButton
+						to="../contacts/new"
+						size="small"
+						color="primary"
+						variant="outlined"
+					>
+						New Contact
+					</LinkButton>
+				</ListItem>
+				<ListItem disablePadding sx={{ justifyContent: 'center' }}>
+					<ThemeToggle />
+				</ListItem>
 			</List>
 		</Box>
 	)
@@ -64,7 +77,7 @@ export function Navbar() {
 				marginLeft="auto"
 				marginRight="auto"
 				width={'100%'}
-				maxWidth="lg"
+				maxWidth="xl"
 			>
 				<AppBar
 					component="nav"
@@ -73,7 +86,12 @@ export function Navbar() {
 					sx={{ boxShadow: 'none' }}
 				>
 					<Toolbar>
-						<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+						<Typography
+							variant="h6"
+							component="div"
+							color="primary"
+							sx={{ flexGrow: 1 }}
+						>
 							Blue Pages
 						</Typography>
 						<Box

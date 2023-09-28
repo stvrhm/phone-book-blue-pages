@@ -6,7 +6,7 @@ import { LinkButton } from '~/components/link-button'
 
 export const meta: MetaFunction = () => {
 	return [
-		{ title: 'Phone Book | Geomagic' },
+		{ title: 'Blue Pages - Phone Book' },
 		{ name: 'description', content: 'Job Interview Exercise' },
 	]
 }
@@ -23,12 +23,8 @@ export default function Index() {
 		>
 			<Navbar />
 			<Box flex={1}>
-				<Container maxWidth="xl" sx={{ marginTop: 8 }}>
-					<Stack
-						spacing={6}
-						maxWidth="sm"
-						sx={{ marginLeft: 'auto', marginRight: 'auto' }}
-					>
+				<Container maxWidth="xl" sx={{ marginTop: 6 }}>
+					<Stack spacing={6} maxWidth="sm">
 						<Typography component="h1" variant="h2">
 							Your Digital <strong>Rolodex</strong>
 							<br></br>for the <strong>Modern Age</strong>

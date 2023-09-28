@@ -15,7 +15,7 @@ export default function ContactsRoute() {
 		>
 			<Navbar />
 			<Box flex={1}>
-				<Container maxWidth="lg" component="main" sx={{ marginTop: 8 }}>
+				<Container maxWidth="xl" component="main" sx={{ marginTop: 6 }}>
 					<Outlet />
 				</Container>
 			</Box>

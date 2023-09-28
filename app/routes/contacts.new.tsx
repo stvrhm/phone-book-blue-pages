@@ -1,10 +1,18 @@
 import { Box, Button, Stack, TextField, Typography } from '@mui/material'
-import { redirect, type ActionFunctionArgs, json } from '@remix-run/node'
+import { redirect, json } from '@remix-run/node'
+import type { MetaFunction, ActionFunctionArgs } from '@remix-run/node'
 import { Form, useActionData } from '@remix-run/react'
 import React from 'react'
 
 const nameRegex = /^[A-Za-zäÄüÜöÖß\s]+$/
 const phoneRegex = /^\+?[1-9][0-9]{7,14}$/
+
+export const meta: MetaFunction = () => {
+	return [
+		{ title: 'Add Contact | Blue Pages' },
+		{ name: 'description', content: 'Job Interview Exercise' },
+	]
+}
 
 export async function action({ request }: ActionFunctionArgs) {
 	const formData = await request.formData()
@@ -59,7 +67,7 @@ export default function NewContactRoute() {
 				}}
 			>
 				<Stack spacing={6}>
-					<Typography component="h1" variant="h3">
+					<Typography component="h1" variant="h4">
 						Add Contact
 					</Typography>
 

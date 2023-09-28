@@ -1,5 +1,5 @@
 import type { PaletteMode } from '@mui/material'
-import { blue, red, grey } from '@mui/material/colors'
+import { blue, grey, amber } from '@mui/material/colors'
 
 const theme = {
 	palette: {
@@ -7,12 +7,17 @@ const theme = {
 			main: blue['A700'],
 		},
 		secondary: {
-			main: red['A400'],
+			main: amber['500'],
 		},
-		divider: blue,
+		border: {
+			default: blue['A700'],
+		},
 		text: {
 			primary: grey[900],
 			secondary: grey[800],
+		},
+		background: {
+			default: amber['50'],
 		},
 	},
 }
@@ -39,11 +44,11 @@ const getDesignTokens = (mode: PaletteMode) => ({
 		...(mode === 'light'
 			? {
 					// palette values for light mode
-					...theme,
+					...theme.palette,
 			  }
 			: {
 					// palette values for dark mode
-					...themeDark,
+					...themeDark.palette,
 			  }),
 	},
 })
