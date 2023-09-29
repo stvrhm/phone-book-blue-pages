@@ -5,7 +5,7 @@ import { Form, useActionData } from '@remix-run/react'
 import React from 'react'
 
 const nameRegex = /^[A-Za-zäÄüÜöÖß\s]+$/
-const phoneRegex = /^\+?[1-9][0-9]{7,14}$/
+const phoneRegex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
 
 export const meta: MetaFunction = () => {
 	return [
@@ -21,19 +21,23 @@ export async function action({ request }: ActionFunctionArgs) {
 
 	const errors = { name: '', phone: '' }
 
+	// Validate the 'name' input using a regular expression and check for empty input
 	if (nameRegex.test(name) || name === '') {
 		errors.name = 'Invalid contact name'
 	}
 
+	// Validate the 'phone' input using a regular expression and check for empty input
 	if (phoneRegex.test(phone) || phone === '') {
 		errors.phone = 'Invalid phone number'
 	}
 
+	// Check if there are any errors
 	if (Object.keys(errors).length > 0) {
+		// Return a JSON response containing the validation errors if there are any
 		return json({ errors })
 	}
 
-	// Redirect if validation is successful
+	// Redirect the user to the home page if validation is successful
 	return redirect('/')
 }
 
@@ -41,18 +45,29 @@ export default function NewContactRoute() {
 	const data = useActionData<typeof action>()
 	const [errors, setErrors] = React.useState({ name: '', phone: '' })
 
-	function handleChange(e) {
-		const { name, value } = e.target
+	/**
+	 * Handle input changes and validate input values based on regular expressions.
+	 *
+	 * @param event - The `React.ChangeEvent` object representing the input change event.
+	 */
+	function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+		// Extract 'name' and 'value' from the input event
+		const { name, value } = event.target
+
+		// Creates a new object to store updated error messages
 		const newErrors = { ...errors }
 
+		// Validate the 'name' input using a regular expression
 		if (name === 'name') {
 			newErrors.name = !nameRegex.test(value) ? 'Invalid name' : ''
 		}
 
+		// Validate the 'phone' input using a regular expression
 		if (name === 'phone') {
 			newErrors.phone = !phoneRegex.test(value) ? 'Invalid phone number' : ''
 		}
 
+		// Set the updated error messages in the state using 'setErrors' function
 		setErrors(newErrors)
 	}
 
@@ -101,7 +116,7 @@ export default function NewContactRoute() {
 								sx={{ mt: 3, mb: 2 }}
 								disabled={Boolean(errors.name) || Boolean(errors.phone)}
 							>
-								Add
+								Add Contact
 							</Button>
 						</Form>
 					</Stack>

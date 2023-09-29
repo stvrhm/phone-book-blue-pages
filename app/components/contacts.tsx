@@ -23,7 +23,7 @@ import {
 import { matchSorter } from 'match-sorter'
 import invariant from 'tiny-invariant'
 import type { ContactData } from 'types'
-import { FixedSizeList } from 'react-window'
+import { FixedSizeList as List } from 'react-window'
 import { getInitials } from '~/utils/misc'
 
 interface ContactCardProps {
@@ -103,14 +103,12 @@ function ContactList({ entries, onSelect }: ContactListProps) {
 	return (
 		<Box>
 			{entries.length === 0 ? (
-				<Box maxHeight={500} height={'50vh'}>
-					<Typography variant="body1">
-						Start typing a name in the search field to find contacts.
-					</Typography>
-				</Box>
+				<Typography variant="body1">
+					Start typing a name in the search field to find contacts.
+				</Typography>
 			) : (
-				<FixedSizeList
-					height={380}
+				<List
+					height={400}
 					width={'100%'}
 					itemSize={80}
 					itemCount={entries.length}
@@ -129,7 +127,7 @@ function ContactList({ entries, onSelect }: ContactListProps) {
 							/>
 						)
 					}}
-				</FixedSizeList>
+				</List>
 			)}
 		</Box>
 	)
@@ -253,9 +251,7 @@ interface ContactsProps {
 
 function Contacts({ contacts, color = 'primary' }: ContactsProps) {
 	const [searchTerm, setSearchTerm] = React.useState<string>('')
-	const [items, setItems] = React.useState<{ name: string; phone: string }[]>(
-		[],
-	)
+	const [items, setItems] = React.useState<Array<ContactData>>([])
 	const [selectedContact, setSelectedContact] = React.useState<{
 		name: string
 		phone: string

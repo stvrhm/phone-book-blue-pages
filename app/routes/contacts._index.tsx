@@ -6,8 +6,6 @@ import { Await, useLoaderData } from '@remix-run/react'
 import { Suspense } from 'react'
 import { getContacts } from '~/utils/contacts'
 import { slow } from '~/utils/misc'
-import { theme } from '~/mui/theme'
-import { useTheme } from '~/mui/use-theme'
 import { useThemeContext } from '~/mui/theme-provider'
 
 export async function loader() {
@@ -35,9 +33,12 @@ export default function ContactsHomeRoute() {
 		<Paper
 			sx={{
 				padding: 3,
-				minHeight: 600,
+				minHeight: '700px',
+				height: '75vh',
+				maxHeight: '75h',
 				flex: 1,
 				bgcolor: theme.palette.background.default,
+				overflow: 'hidden',
 			}}
 			elevation={6}
 		>
@@ -47,7 +48,7 @@ export default function ContactsHomeRoute() {
 				</Typography>
 				<Suspense
 					fallback={
-						<Box maxHeight={500} height={'50vh'}>
+						<Box height={'75vh'}>
 							<Typography variant="body1">Loading...</Typography>
 						</Box>
 					}
