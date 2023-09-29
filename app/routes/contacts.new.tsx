@@ -50,7 +50,9 @@ export default function NewContactRoute() {
 	 *
 	 * @param event - The `React.ChangeEvent` object representing the input change event.
 	 */
-	function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+	function handleChange(
+		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) {
 		// Extract 'name' and 'value' from the input event
 		const { name, value } = event.target
 

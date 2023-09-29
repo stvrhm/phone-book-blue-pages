@@ -5,7 +5,8 @@ import type { MetaFunction } from '@remix-run/react'
 import { Await, useLoaderData } from '@remix-run/react'
 import { Suspense } from 'react'
 import { getContacts } from '~/utils/contacts'
-import { slow } from '~/utils/misc'
+// 👇🏼 util function for testing pending ui
+// import { slow } from '~/utils/misc'
 import { useThemeContext } from '~/mui/theme-provider'
 
 export async function loader() {
